@@ -1,1 +1,1 @@
-export * from './user.constants'
+export * from './center.constants'

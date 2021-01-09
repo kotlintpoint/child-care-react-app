@@ -4,7 +4,7 @@
 we pass object as action 
 special in real scenario we pass function instead of object => redux-thunk(Middleware)
 */
-import {userConstants} from '../_constants/user.constants'
+import {centerConstants} from '../_constants'
 
 export const createCenter=(center)=>{
     return (dispatch)=>{
@@ -13,7 +13,7 @@ export const createCenter=(center)=>{
         2. success
         3. fail
         */
-       dispatch({ type: userConstants.CREATE_CENTER_REQUEST })  // reducer
+       dispatch({ type: centerConstants.CREATE_CENTER_REQUEST })  // reducer
        
        fetch('http://localhost:3001/center', {
            method:'POST',
@@ -21,12 +21,12 @@ export const createCenter=(center)=>{
            body : JSON.stringify(center)
        }).then(response=>{
             console.log(response)
-            dispatch({ type: userConstants.CREATE_CENTER_SUCCESS })
+            dispatch({ type: centerConstants.CREATE_CENTER_SUCCESS })
 
        }) 
        .catch(error=>{
             console.log(error)
-            dispatch({ type: userConstants.CREATE_CENTER_FAIL })
+            dispatch({ type: centerConstants.CREATE_CENTER_FAIL })
        })  
 
     }
