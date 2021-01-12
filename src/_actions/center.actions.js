@@ -8,11 +8,6 @@ import {centerConstants} from '../_constants'
 
 export const createCenter=(center)=>{
     return (dispatch)=>{
-        /*
-        1. request => done
-        2. success
-        3. fail
-        */
        dispatch({ type: centerConstants.CREATE_CENTER_REQUEST })  // reducer
        
        fetch('http://localhost:3001/center', {

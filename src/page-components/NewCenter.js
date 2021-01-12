@@ -1,15 +1,31 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Card, Container, Row, Form, Col, Button} from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { createCenter } from '../_actions'
 
 
 function NewCenter(props) {
-  console.log(props.user)
+  //console.log(props.user)
+    const [center, setCenter] = useState({
+        name:"",
+        address:"",
+        email_id:"",
+        phone:"",
+        description:"",
+        password:""
+    })
+
+    const handleChange=(e)=>{
+      setCenter({
+        ...center,
+        [e.target.name]:e.target.value
+      })
+    }
+
     return (
         <>
-         <Container>
-            
+        <p>{JSON.stringify(center)}</p>
+         <Container>            
             <Row>
                 <Col md={11}>
              <Card border="secondary" bg="light" text="dark">
@@ -18,34 +34,40 @@ function NewCenter(props) {
           <Form>
               <Form.Group ControlId="CName">
                 <Form.Label>Center Name </Form.Label>
-                <Form.Control type="text" placeholder="Enter Center Name" />
+                <Form.Control type="text" placeholder="Enter Center Name" 
+                name="name" value={center.name} onChange={handleChange} />
               </Form.Group>
 
               <Form.Group ControlId="CAddress">
                 <Form.Label>Address </Form.Label>
-                <Form.Control as="textarea" rows={2} placeholder="Enter Address" />
+                <Form.Control as="textarea" rows={2} placeholder="Enter Address"
+                name="address" value={center.address} onChange={handleChange} />
               </Form.Group>
 
               <Form.Row>
               <Form.Group as={Col} ControlId="ManagerName">
                 <Form.Label>Manager Name </Form.Label>
-                <Form.Control type="text" placeholder="Enter Manager Name" />
+                <Form.Control type="text" placeholder="Enter Manager Name"
+                 />
               </Form.Group>
 
               <Form.Group as={Col} ControlId="PhoneNum">
                 <Form.Label>Phone Number </Form.Label>
-                <Form.Control type="number" placeholder="+91 1234567890" />
+                <Form.Control type="number" placeholder="+91 1234567890"
+                name="phone" value={center.phone} onChange={handleChange} />
               </Form.Group>
 
               <Form.Group as={Col} ControlId="Emailaddress">
                 <Form.Label>Email Address</Form.Label>
-                <Form.Control type="email" placeholder="xyz@gmail.com" />
+                <Form.Control type="email" placeholder="xyz@gmail.com" 
+                name="email_id" value={center.email_id} onChange={handleChange}/>
               </Form.Group>
               </Form.Row>
 
               <Form.Group ControlId="Website">
                 <Form.Label>Website</Form.Label>
-                <Form.Control type="text" placeholder="www.google.com" />
+                <Form.Control type="text" placeholder="www.google.com"
+                 />
               </Form.Group>
 
               <Form.Group ControlId="SocialMedia">
@@ -55,11 +77,12 @@ function NewCenter(props) {
 
               <Form.Group ControlId="CDescription">
                 <Form.Label>Center Description</Form.Label>
-                <Form.Control as="textarea" row={5} placeholder="Enter Description" />
+                <Form.Control as="textarea" row={5} placeholder="Enter Description"
+                name="description" value={center.description} onChange={handleChange} />
               </Form.Group>
 
               <Button variant="danger" className="float-right" 
-              onClick={props.createUser}>
+              onClick={()=>props.createUser(center)}>
                 Add Center
               </Button>
              </Form>
@@ -82,16 +105,7 @@ const mapStateToProps =(state)=>{
 // Step 2
 const mapDispatchToProps=(dispatch)=>{
   return {
-    createUser : ()=>dispatch(createCenter({
-    
-        name:"test123",
-        address:"test",
-        email_id:"test123",
-        phone:"123123",
-        description:"test",
-        password:"test"
-    
-    }))
+    createUser : (center)=>dispatch(createCenter(center))
   }
 }
 

@@ -6,7 +6,7 @@ const initialUser={
     error:''
 }
 
-export const userReducer=(state=initialUser, action)=>{
+export const centerReducer=(state=initialUser, action)=>{
     switch(action.type){
         case centerConstants.CREATE_CENTER_REQUEST:
             return{
